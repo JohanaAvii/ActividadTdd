@@ -8,7 +8,7 @@ def hello():
     return {"message": "Hello FastAPI"}
 
 @app.get("/IsPrime/{num}")
-def is_prime(num: int):
+def is_primen(num: int):
     if num < 2:
         return {"is_prime": False}
     for i in range(2, int(sqrt(num))+1):
