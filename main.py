@@ -8,7 +8,7 @@ def hello():
     return {"message": "Hello FastAPI"}
 
 @app.get("/IsPrime/{num}")
-def is_primen(num: int):
+def is_prime(num: int):
     if num < 2:
         return {"is_prime": False}
     for i in range(2, int(sqrt(num))+1):
@@ -17,7 +17,7 @@ def is_primen(num: int):
     return {"is_prime": True}
 
 
-
+#hdsfhhfhdfjk
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
