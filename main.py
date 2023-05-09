@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Header , HTTPException
+from pydantic import BaseModel
 from math import sqrt
 
 app = FastAPI()
@@ -9,27 +10,34 @@ def hello():
 
 @app.get("/IsPrime/{num}")
 def is_prime(num: int):
-    if num < 2:
-        return {"is_prime": False}
-    for i in range(2, int(sqrt(num))+1):
-        if num % i == 0:
-            return {"is_prime": False}
-    return {"is_prime": True}
+
+    if num>1:
+        s=int(num/2)
+        for i in range(2,s+1):
+            if num%i==0:
+                return {"changed": False, "msg": "No es primo"}
+                break
+        return {"changed": True, "msg": "Es primo"}
+    else:
+        return {"changed": False, "msg": "No es primo"}
+
 
 @app.get("/fibonacci/{pos}")
-def fibonacci(pos: int):
-    if pos == 0:
+def read_fibonacci(pos: int):
+    if pos<1:
+        return{"Error": "Posición inválida"}
+    if pos==1:
         return {"fibonacci": 0}
-    elif pos == 1:
+    if pos==2:
         return {"fibonacci": 1}
-    else:
-        a = 0
-        b = 1
-        for i in range(2, pos+1):
-            c = a + b
-            a = b
-            b = c
-        return {"fibonacci": b}
+    ant=0
+    sig=1
+    for i in range(pos-2):     
+        num=ant+sig
+        ant=sig
+        sig=num
+      
+    return {"fibonacci": sig}
 
 
 if __name__ == "__main__":

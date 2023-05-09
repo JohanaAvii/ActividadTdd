@@ -7,11 +7,11 @@ client = TestClient(app)
 def test_is_prime_endpoint():
     response = client.get("/IsPrime/4")
     assert response.status_code == 200
-    assert response.json() == {"is_prime": False}
+    assert response.json() == {"changed": False, "msg": "No es primo"}   
 
     response = client.get("/IsPrime/2")
     assert response.status_code == 200
-    assert response.json() == {"is_prime": True}
+    assert response.json() == {"changed": True, "msg": "Es primo"}   
 
 
 def test_fibonacci_endpoint():
